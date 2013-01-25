@@ -1,0 +1,65 @@
+#http://habrahabr.ru/post/154643/
+Options All -ExecCGI -Indexes -Includes +FollowSymLinks
+DirectoryIndex index.php
+ServerSignature Off
+AddDefaultCharset utf8
+#-------------------------------------------
+
+#php_value upload_max_filesize	32M
+#php_value post_max_size		10M
+#php_value max_execution_time 200
+#php_value zlib.output_compression off
+php_value default_charset utf-8
+php_value expose_php off
+php_value display_errors off
+php_value log_errors on
+#-------------------------------------------
+
+AddType application/x-javascript .js
+AddType text/css .css
+AddType text/xml .xml
+AddType application/octet-stream .doc .mov .avi .pdf .xls 
+#-------------------------------------------
+
+<ifModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript
+	SetOutputFilter DEFLATE
+</ifModule>
+#-------------------------------------------
+
+<ifModule mod_headers.c>
+    #кэшировать html и htm файлы на один день
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=43200"
+    </FilesMatch>
+    #кэшировать css, javascript и текстовые файлы на одну неделю
+    <FilesMatch "\.(js|css|txt)$">
+        Header set Cache-Control "max-age=604800"
+		FileETag MTime Size
+    </FilesMatch>
+    #кэшировать флэш и изображения на месяц
+    <FilesMatch "\.(flv|swf|ico|gif|jpg|jpeg|png)$">
+        Header set Cache-Control "max-age=2592000"
+		FileETag MTime Size
+    </FilesMatch>
+    #отключить кэширование
+    <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+        Header unset Cache-Control
+    </FilesMatch>
+</IfModule>
+#-------------------------------------------
+
+RewriteEngine On
+#RewriteBase /
+
+#RewriteCond %{HTTP_HOST} ^hm59
+#RewriteRule (.*) http://www.hm59.ru/$1 [R=301,L]
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+#RewriteRule ^index\.php$ http://www.hm59.ru/ [R=301,L]
+
+RewriteRule ^.*.(js|css|jpg|png|gif|ico|eot|svg|ttf|woff)$ $0 [L]
+RewriteRule ^.htaccess$ - [F]
+RewriteRule ^script.php $0 [L]
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.*) index.php?path=$1 [QSA,L]

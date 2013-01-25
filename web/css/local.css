@@ -1,0 +1,12 @@
+.gview h1,.gview h2,.gview h3, .gview h4, .price_val, .slide_num_count,
+.glist .good .title, .glist .good .price, .glist .cat_title, .glist .subcat_header h2,
+#header h1, #header h2, #header h1.phone, .left_col h2,
+.wnd_body .wnd_tbl_title .title, #frm_order #frm_order_good__row .frm_row_cont,
+.admin h1
+{font-family: /*'PFAgoraSlabPro-Medium',*/ Verdana, Geneva, sans-serif;}
+
+
+body {background: url('../images/bg1.png') 36px -27px; background-attachment: fixed;}
+body, .button, .button:hover, a.button, a.button:hover, textarea {font: 12px/1.2 Verdana, Geneva, sans-serif;}
+
+#header h1 {color: #F35B2B; font-family: Georgia, Verdana, Geneva, sans-serif; font-style: italic;}
