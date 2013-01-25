@@ -1,0 +1,6 @@
+temp/scripts/*
+temp/sql_cache/*
+temp/view_cache/*
+web/upload/big/*
+web/upload/mid/*
+web/upload/small/*
